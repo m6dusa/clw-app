@@ -1,19 +1,21 @@
 package pages;
 
-import org.openqa.selenium.ElementNotInteractableException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+
+import java.util.Arrays;
+
 
 /**
  * Created by Roman on 11/28/2017.
  */
 public class loginPage extends basePage {
-    @FindBy (css = "#email")
-    private WebElement mark;
+    //@FindBy (css = "#email")
+    //private WebElement mark;
     @FindBy(css = "#email")
     private WebElement login;
     @FindBy(css = "#password")
@@ -29,11 +31,18 @@ public class loginPage extends basePage {
 
 
 
-    public loginPage(WebDriver driver,WebDriverWait wait) {
+    public loginPage(WebDriver driver,WebDriverWait wait, String url) {
         super(driver, wait);
+        navigateTo(url);
+        wait.until(ExpectedConditions.visibilityOfAllElements(Arrays.asList(login)));
 
 
 
+
+    }
+    public loginPage(WebDriver driver, WebDriverWait wait){
+        super(driver, wait);
+        wait.until(ExpectedConditions.visibilityOf(login));
 
 
     }
@@ -57,7 +66,7 @@ public class loginPage extends basePage {
             return null;
         }
     }
-    public WebElement getMark() {
+    /*public WebElement getMark() {
         return this.mark;
-    }
+    }*/
 }

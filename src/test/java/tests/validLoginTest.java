@@ -10,15 +10,15 @@ import pages.*;
 public class validLoginTest extends baseTest {
     @Test
     public void signuptest(){
-        loginPage loginPage = new loginPage(driver, wait);
-        loginPage.navigateTo("https://app-dev.classwallet.com");
-        if (loginPage.isLoaded(loginPage.getMark())) {
-            loginPage.enterEmail("ebutler@classwallet.com");
-            loginPage.enterPassword("password");
-            homePage homePage = loginPage.login();
-            Assert.assertTrue(homePage.isLoaded(homePage.getMark()));
+        loginPage loginPage = new loginPage(driver, wait, "https://app-dev.classwallet.com");
+        //loginPage.navigateTo("https://app-dev.classwallet.com");
+        //loginPage.
+        loginPage.enterEmail("ebutler@classwallet.com");
+        loginPage.enterPassword("password");
+        homePage homePage = loginPage.login();
+        Assert.assertTrue(homePage.isDisplayed());
 
-        }
+
 
     }
 }

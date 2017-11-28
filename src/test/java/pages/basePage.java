@@ -22,8 +22,8 @@ public class basePage {
     public void navigateTo(String URL){
         driver.navigate().to(URL);
     }
-    public boolean isLoaded(WebElement mark){
+    /*public boolean isLoaded(WebElement mark){
         wait.until(ExpectedConditions.visibilityOf(mark));
         return mark.isDisplayed();
-    }
+    }*/
 }
