@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 
 /**
@@ -28,7 +30,9 @@ public class loginPage extends basePage {
     private WebElement forgotPasswordLink;
     @FindBy(css = "a[target = '_blank']")
     private WebElement SupportLink;
-
+    @FindBy(css = "#message")
+    private WebElement Errormsg;
+    private String ErrorText = "Invalid user or password. Please try again.";
 
 
     public loginPage(WebDriver driver,WebDriverWait wait, String url) {
@@ -59,8 +63,12 @@ public class loginPage extends basePage {
     public homePage login() {
         if (login.getAttribute("value") != null && password.getAttribute("value") != null)
         {
+            try{
             loginBtn.click();
+            getErrorText();
+            }catch(Exception ex){
             return new homePage(driver, wait);
+            }return null;
         }
         else {
             return null;
@@ -69,4 +77,13 @@ public class loginPage extends basePage {
     /*public WebElement getMark() {
         return this.mark;
     }*/
+    public String getErrorText(){
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Errormsg.getText();
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        return Errormsg.getText();
+    }
+    public String getLoginError(){
+        return ErrorText;
+    }
 }
