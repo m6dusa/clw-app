@@ -3,7 +3,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.*;
+import pages.app.*;
+
 
 
 /**
