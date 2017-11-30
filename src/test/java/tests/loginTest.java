@@ -10,22 +10,33 @@ import pages.*;
 public class loginTest extends baseTest {
     @Test
     public void validSignIn(){
-        loginPage loginPage = new loginPage(driver, wait, "https://app-dev.classwallet.com");
+        loginPage loginPage = new loginPage(driver, "https://app-dev.classwallet.com");
         //loginPage.navigateTo("https://app-dev.classwallet.com");
         //loginPage.
         loginPage.enterEmail("ebutler@classwallet.com");
         loginPage.enterPassword("password");
         homePage homePage = loginPage.login();
-        Assert.assertTrue(homePage.isDisplayed());
+        //Assert.assertTrue(homePage.isDisplayed());
         homePage.logout();
 
     }
     @Test
     public void invalidSignIn(){
-        loginPage loginPage = new loginPage(driver, wait, "https://app-dev.classwallet.com");
+        loginPage loginPage = new loginPage(driver, "https://app-dev.classwallet.com");
         loginPage.enterEmail("invalid@email.com");
         loginPage.enterPassword("invalidpassword");
         loginPage.login();
         Assert.assertEquals(loginPage.getErrorText(), loginPage.getLoginError());
     }
+
+    //@Test
+    /*public void test(){
+        loginPage loginPage = new loginPage(driver, "https://app-dev.classwallet.com");
+        loginPage.enterEmail("ebutler@classwallet.com");
+        loginPage.enterPassword("password");
+        homePage homePage = loginPage.login();
+        homePage.logout();
+        Assert.assertTrue(homePage.isDisplayed());
+
+    }*/
 }

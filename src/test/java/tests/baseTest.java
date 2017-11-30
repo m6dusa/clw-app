@@ -15,12 +15,11 @@ import org.testng.annotations.BeforeTest;
  */
 public class baseTest {
     protected static WebDriver driver;
-    static WebDriverWait wait;
-    //Dimension dm = new Dimension(1900, 1600);
+
     @BeforeClass
     public void setUp() {
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 20);
+
 
     }
     @AfterClass

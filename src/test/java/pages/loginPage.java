@@ -30,27 +30,29 @@ public class loginPage extends basePage {
     private WebElement forgotPasswordLink;
     @FindBy(css = "a[target = '_blank']")
     private WebElement SupportLink;
-    @FindBy(css = "#message")
+    @FindBy(css = "p#message")
     private WebElement Errormsg;
     private String ErrorText = "Invalid user or password. Please try again.";
 
 
-    public loginPage(WebDriver driver,WebDriverWait wait, String url) {
-        super(driver, wait);
+    public loginPage(WebDriver driver, String url) {
+        super(driver);
         navigateTo(url);
-        wait.until(ExpectedConditions.visibilityOfAllElements(Arrays.asList(login)));
-
-
-
-
-    }
-    public loginPage(WebDriver driver, WebDriverWait wait){
-        super(driver, wait);
-        wait.until(ExpectedConditions.visibilityOf(login));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(Arrays.asList(login)));
 
 
     }
-    public void enterEmail(String login){
+
+    public loginPage(WebDriver driver) {
+        super(driver);
+        System.err.println("before wait");
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(login));
+        System.err.println("After wait");
+
+
+    }
+
+    public void enterEmail(String login) {
 
         this.login.clear();
         this.login.sendKeys(login);
@@ -60,30 +62,35 @@ public class loginPage extends basePage {
         this.password.clear();
         this.password.sendKeys(password);
     }
+
     public homePage login() {
-        if (login.getAttribute("value") != null && password.getAttribute("value") != null)
-        {
-            try{
+        try {
             loginBtn.click();
-            getErrorText();
-            }catch(Exception ex){
-            return new homePage(driver, wait);
-            }return null;
-        }
-        else {
-            return null;
+            if (getErrorText() == getLoginError())
+                return null;
+            else return new homePage(driver);
+        } catch (org.openqa.selenium.TimeoutException ex) {
+            return new homePage(driver);
         }
     }
+
+
     /*public WebElement getMark() {
         return this.mark;
     }*/
-    public String getErrorText(){
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        Errormsg.getText();
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    public String getErrorText() {
+
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(Errormsg));
         return Errormsg.getText();
     }
-    public String getLoginError(){
+
+    public String getLoginError() {
         return ErrorText;
     }
+
+
 }
+
+
+
+

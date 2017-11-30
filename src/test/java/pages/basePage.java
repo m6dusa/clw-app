@@ -11,12 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class basePage {
     protected WebDriver driver;
-    protected WebDriverWait wait;
 
 
-    public basePage(WebDriver driver, WebDriverWait wait) {
+
+    public basePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = wait;
+
         PageFactory.initElements(driver, this);
     }
     public void navigateTo(String URL){
