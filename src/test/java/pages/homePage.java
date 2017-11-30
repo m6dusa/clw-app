@@ -24,7 +24,7 @@ public class homePage extends basePage{
     List<WebElement> dropdownitems;
     public homePage(WebDriver driver) {
         super(driver);
-        System.out.println("Before wait");
+
         super.pageLoad();
     }
     public boolean isDisplayed(){

@@ -35,7 +35,7 @@ public class loginPage extends basePage {
     public loginPage(WebDriver driver, String url) {
         super(driver);
         navigateTo(url);
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(login));
+        super.pageLoad();
     }
     public loginPage(WebDriver driver) {
         super(driver);
