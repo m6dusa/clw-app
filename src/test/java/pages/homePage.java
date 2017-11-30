@@ -25,9 +25,7 @@ public class homePage extends basePage{
     public homePage(WebDriver driver) {
         super(driver);
         System.out.println("Before wait");
-
-        new WebDriverWait(driver, 500).until((ExpectedCondition<Boolean>) (driver1) -> ((JavascriptExecutor)driver1).executeScript("return document.readyState").equals("complete"));
-
+        super.pageLoad();
     }
     public boolean isDisplayed(){
         try {

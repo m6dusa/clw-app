@@ -8,8 +8,8 @@ import pages.*;
  * Created by Work on 11/28/2017.
  */
 public class loginTest extends baseTest {
-    @Test
-    public void validSignIn(){
+    @Test(description = "sign in with valid credentials")
+    public void validSignIn() {
         loginPage loginPage = new loginPage(driver, "https://app-dev.classwallet.com");
         //loginPage.navigateTo("https://app-dev.classwallet.com");
         //loginPage.
@@ -18,10 +18,10 @@ public class loginTest extends baseTest {
         homePage homePage = loginPage.login();
         //Assert.assertTrue(homePage.isDisplayed());
         homePage.logout();
-
     }
-    @Test
-    public void invalidSignIn(){
+
+    @Test(description = "sign in with invalid credentials")
+    public void invalidSignIn() {
         loginPage loginPage = new loginPage(driver, "https://app-dev.classwallet.com");
         loginPage.enterEmail("invalid@email.com");
         loginPage.enterPassword("invalidpassword");
@@ -29,14 +29,18 @@ public class loginTest extends baseTest {
         Assert.assertEquals(loginPage.getErrorText(), loginPage.getLoginError());
     }
 
-    //@Test
-    /*public void test(){
+    @Test(description = "sign in without a password")
+    public void invalidSignInWithoutAPassword() {
         loginPage loginPage = new loginPage(driver, "https://app-dev.classwallet.com");
         loginPage.enterEmail("ebutler@classwallet.com");
-        loginPage.enterPassword("password");
-        homePage homePage = loginPage.login();
-        homePage.logout();
-        Assert.assertTrue(homePage.isDisplayed());
-
-    }*/
+        loginPage.login();
+        Assert.assertEquals(loginPage.getErrorText(), loginPage.getLoginError());
+    }
+    @Test(description = "sign in without an email")
+    public void invalidSignInWithoutAnEmail() {
+        loginPage loginPage = new loginPage(driver, "https://app-dev.classwallet.com");
+        loginPage.enterPassword("anypassword");
+        loginPage.login();
+        Assert.assertEquals(loginPage.getErrorText(), loginPage.getLoginError());
+    }
 }
