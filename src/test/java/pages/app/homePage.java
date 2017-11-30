@@ -16,15 +16,15 @@ import java.util.List;
  * Created by Roman on 11/28/2017.
  */
 public class homePage extends basePage{
-        @FindBy(css = "div > a.fa" )
-        WebElement hamburger;
-        @FindBy(xpath = "//button[.//span[contains(@class, 'caret')]]")
-        WebElement dropdownbtn;
+    @FindBy(css = "div > a.fa" )
+    WebElement hamburger;
+    @FindBy(xpath = "//button[.//span[contains(@class, 'caret')]]")
+    WebElement dropdownbtn;
+    //1st item is personal settings, 2nd is logout
     @FindBy(css = "span[role='menuitem']")
     List<WebElement> dropdownitems;
     public homePage(WebDriver driver) {
         super(driver);
-
         super.pageLoad();
     }
     public boolean isDisplayed(){
@@ -44,6 +44,7 @@ public class homePage extends basePage{
         return new loginPage(driver);
     }
     public void mywait(){
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(dropdownbtn));
+        new WebDriverWait(driver, 10).until(ExpectedConditions
+                .elementToBeClickable(dropdownbtn));
     }
 }

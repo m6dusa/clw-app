@@ -27,6 +27,7 @@ public class basePage {
     }*/
     //pageLoad is a method to verify that the page is load it's done via the state of document.ReadyState
     public boolean pageLoad(){
-        return new WebDriverWait(driver, 20).until((ExpectedCondition<Boolean>) (driver1) -> ((JavascriptExecutor)driver1).executeScript("return document.readyState").equals("complete"));
+        return new WebDriverWait(driver, 20).until((ExpectedCondition<Boolean>) (driver1) ->
+                ((JavascriptExecutor)driver1).executeScript("return document.readyState").equals("complete"));
     }
 }
