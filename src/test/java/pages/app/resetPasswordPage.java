@@ -8,23 +8,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class resetPasswordPage extends basePage{
     @FindBy(css = "input[type='email']")
-    WebElement emailfield;
+    private WebElement emailfield;
     @FindBy(css = "button#check-email")
-    WebElement submitEmail;
+    private WebElement submitEmail;
     @FindBy(css = "h3.type_header")
-    WebElement resetpswheader;
+    private WebElement resetpswheader;
     @FindBy(css = ".status_message")
-    WebElement wrongEmailPopUp;
+    private WebElement wrongEmailPopUp;
     @FindBy(css = "p > b")
-    WebElement question;
+    private WebElement question;
     @FindBy(css = "input[type='text']")
-    WebElement answer;
+    private WebElement answer;
     @FindBy(css = "button#checkTheAnswer")
-    WebElement submitAnswer;
+    private WebElement submitAnswer;
     @FindBy(css = "p.status_message")
-    WebElement wrongAnswerPopUp;
+    private WebElement wrongAnswerPopUp;
     @FindBy(css = ".modal-content")
-    WebElement modal;
+    private WebElement modal;
+    private String email;
 
 
     public resetPasswordPage(WebDriver driver){
@@ -33,6 +34,7 @@ public class resetPasswordPage extends basePage{
     }
     public void enterEmail(String email){
         emailfield.clear();
+        this.email = email;
         emailfield.sendKeys(email);
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(question));
     }
@@ -45,6 +47,9 @@ public class resetPasswordPage extends basePage{
     public void submitAnswer(){
         this.submitAnswer.click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(modal));
+    }
+    public String getEmail(){
+        return this.email;
     }
 }
 

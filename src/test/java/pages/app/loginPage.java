@@ -27,10 +27,10 @@ public class loginPage extends basePage {
     @FindBy(css = ".b-admin__link")
     private WebElement forgotPasswordLink;
     @FindBy(css = "a[target = '_blank']")
-    private WebElement SupportLink;
+    private WebElement supportLink;
     @FindBy(css = "p#message")
-    private WebElement Errormsg;
-    private String ErrorText = "Invalid user or password. Please try again.";
+    private WebElement errorMsg;
+    private String errorText = "Invalid user or password. Please try again.";
 
     public loginPage(WebDriver driver, String url) {
         super(driver);
@@ -62,11 +62,17 @@ public class loginPage extends basePage {
         }
     }
     public String getErrorText() {
-        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(Errormsg));
-        return Errormsg.getText();
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(errorMsg));
+        return errorMsg.getText();
     }
     public String getLoginError() {
-        return ErrorText;
+        return errorText;
+    }
+
+
+    public supportPage clickSupportLink(String URL) {
+        supportLink.click();
+        return new supportPage(driver);
     }
 }
 
