@@ -36,16 +36,11 @@ public class homePage extends basePage{
             throw new TimeoutException();
         }
     }
-    /*public WebElement getMark() {
 
-    }*/
     public loginPage logout() {
         new Actions(driver).click(dropdownbtn).perform();
         new Actions(driver).click(dropdownitems.get(1)).perform();
         return new loginPage(driver, DBHelper);
     }
-    public void mywait(){
-        new WebDriverWait(driver, 10).until(ExpectedConditions
-                .elementToBeClickable(dropdownbtn));
-    }
 }
+

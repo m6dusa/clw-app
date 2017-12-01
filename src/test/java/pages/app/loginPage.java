@@ -41,6 +41,7 @@ public class loginPage extends basePage {
         super(driver,DBHelper);
         super.pageLoad();
     }
+
     public void enterEmail(String login) {
 
         this.login.clear();

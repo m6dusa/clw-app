@@ -52,6 +52,10 @@ public class resetPasswordPage extends basePage{
         this.answer.clear();
         this.answer.sendKeys(answerString);
     }
+    public void enterWrongAnswer(){
+        this.answer.clear();
+        this.answer.sendKeys(answerString+"1");
+    }
     public void submitAnswer(){
         this.submitAnswer.click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(modal));
