@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import helper.DBHelper;
 
+import java.util.Map;
+
 public class resetPasswordPage extends basePage{
     @FindBy(css = "input[type='email']")
     private WebElement emailfield;
@@ -28,7 +30,7 @@ public class resetPasswordPage extends basePage{
     private String email;
     String questionString;
     String answerString;
-
+    Map<String, String> qa;
     public resetPasswordPage(WebDriver driver, DBHelper DBHelper){
         super(driver, DBHelper);
         new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(resetpswheader, "Reset Password"));
@@ -37,8 +39,9 @@ public class resetPasswordPage extends basePage{
     public void enterEmail(String email){
         emailfield.clear();
         this.email = email;
-        this.questionString =  DBHelper.getQA(email).get("question");
-        this.answerString =  DBHelper.getQA(email).get("answer");
+        qa = DBHelper.getQA(email);
+        this.questionString =  qa.get("question");
+        this.answerString =  qa.get("answer");
         emailfield.sendKeys(email);
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(question));
     }
