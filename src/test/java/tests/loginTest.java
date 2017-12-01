@@ -46,4 +46,10 @@ public class loginTest extends baseTest {
         loginPage.login();
         Assert.assertEquals(loginPage.getErrorText(), loginPage.getLoginError());
     }
+  @Test(description = "login wiyhout any credentials)
+       public void nocredtest(){
+         loginPage loginPage = new loginPage(driver, "https://app-dev.classwallet.com");
+         loginPage.login();
+         Assert.assertEquals(loginPage.getErrorText(), loginPqge.getLoginError());
+         }
 }
