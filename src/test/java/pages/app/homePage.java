@@ -1,5 +1,6 @@
 package pages.app;
 
+import helper.DBHelper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -23,8 +24,8 @@ public class homePage extends basePage{
     //1st item is personal settings, 2nd is logout
     @FindBy(css = "span[role='menuitem']")
     List<WebElement> dropdownitems;
-    public homePage(WebDriver driver) {
-        super(driver);
+    public homePage(WebDriver driver, DBHelper DBHelper) {
+        super(driver, DBHelper);
         super.pageLoad();
     }
     public boolean isDisplayed(){
@@ -41,7 +42,7 @@ public class homePage extends basePage{
     public loginPage logout() {
         new Actions(driver).click(dropdownbtn).perform();
         new Actions(driver).click(dropdownitems.get(1)).perform();
-        return new loginPage(driver);
+        return new loginPage(driver, DBHelper);
     }
     public void mywait(){
         new WebDriverWait(driver, 10).until(ExpectedConditions

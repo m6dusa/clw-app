@@ -1,6 +1,6 @@
 package pages.app;
 
-
+import helper.DBHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,13 +32,13 @@ public class loginPage extends basePage {
     private WebElement errorMsg;
     private String errorText = "Invalid user or password. Please try again.";
 
-    public loginPage(WebDriver driver, String url) {
-        super(driver);
+    public loginPage(WebDriver driver,DBHelper DBHelper, String url) {
+        super(driver,DBHelper);
         navigateTo(url);
         super.pageLoad();
     }
-    public loginPage(WebDriver driver) {
-        super(driver);
+    public loginPage(WebDriver driver, DBHelper DBHelper) {
+        super(driver,DBHelper);
         super.pageLoad();
     }
     public void enterEmail(String login) {
@@ -56,9 +56,9 @@ public class loginPage extends basePage {
             //if we see an error we just return null, or return an actual pageObject - if is added just as plug
             if (getErrorText().equals(getLoginError()))
                 return null;
-            else return new homePage(driver);
+            else return new homePage(driver, DBHelper);
         } catch (org.openqa.selenium.TimeoutException ex) {
-            return new homePage(driver);
+            return new homePage(driver, DBHelper);
         }
     }
     public String getErrorText() {
@@ -70,9 +70,13 @@ public class loginPage extends basePage {
     }
 
 
-    public supportPage clickSupportLink(String URL) {
+    public supportPage clickSupportLink() {
         supportLink.click();
         return new supportPage(driver);
+    }
+    public resetPasswordPage clickResetPasswordLink(){
+        forgotPasswordLink.click();
+        return new resetPasswordPage(driver, DBHelper);
     }
 }
 

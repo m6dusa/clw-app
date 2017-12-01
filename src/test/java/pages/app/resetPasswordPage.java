@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import helper.DBHelper;
 
 public class resetPasswordPage extends basePage{
     @FindBy(css = "input[type='email']")
@@ -26,23 +26,28 @@ public class resetPasswordPage extends basePage{
     @FindBy(css = ".modal-content")
     private WebElement modal;
     private String email;
+    String questionString;
+    String answerString;
 
-
-    public resetPasswordPage(WebDriver driver){
-        super(driver);
+    public resetPasswordPage(WebDriver driver, DBHelper DBHelper){
+        super(driver, DBHelper);
         new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(resetpswheader, "Reset Password"));
+
     }
     public void enterEmail(String email){
         emailfield.clear();
         this.email = email;
+        this.questionString =  DBHelper.getQA(email).get("question");
+        this.answerString =  DBHelper.getQA(email).get("answer");
         emailfield.sendKeys(email);
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(question));
     }
     public void submitEmail(){
         submitEmail.click();
     }
-    public void enterAnswer(String answer){
-        this.answer.sendKeys(answer);
+    public void enterAnswer(){
+        this.answer.clear();
+        this.answer.sendKeys(answerString);
     }
     public void submitAnswer(){
         this.submitAnswer.click();
@@ -51,5 +56,12 @@ public class resetPasswordPage extends basePage{
     public String getEmail(){
         return this.email;
     }
+    public String getQuestionText(){
+        return question.getText();
+    }
+    public String getDBquestion(){
+        return questionString;
+    }
+
 }
 
