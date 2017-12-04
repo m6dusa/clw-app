@@ -44,22 +44,20 @@ public class mailHelper {
 //                    System.out.println("Sender: " + indvidualmsg.getFrom()[0]);
 //                    System.out.println("Content: " + indvidualmsg.getContent().toString());
                    javax.mail.internet.MimeMultipart mmp = (javax.mail.internet.MimeMultipart) indvidualmsg.getContent();
-                    for (int d = 0, s = mmp.getCount(); d < s; d++) {
-                        Part part = mmp.getBodyPart(d);
-                        if (mmp.getContentType().contains("image/")) {
-                            break;
-                        } else {
+
+                        Part part = mmp.getBodyPart(0);
+
                             Pattern p = Pattern.compile("(https.*app-dev.classwallet([^>])*)+");
-                            Matcher m = p.matcher(getText(part));
-                            System.out.println(m.find(1));
+                            Matcher m = p.matcher((String)(part.getContent()));
+                            System.out.println(m.find());
                             System.out.println(m.start() + " "+ m.end());
-                            System.out.println(getText(part).substring(m.start(), m.end()));
+                            System.out.println(((String)(part.getContent())).substring(m.start(), m.end()));
 
 
 
-                        }
 
-                    }
+
+
 
 
 
