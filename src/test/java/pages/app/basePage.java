@@ -26,11 +26,14 @@ public class basePage {
     //basic method to navigate to the url
     public void navigateTo(String URL){
         driver.navigate().to(URL);
+        pageLoad();
     }
     /*public boolean isLoaded(WebElement mark){
         wait.until(ExpectedConditions.visibilityOf(mark));
         return mark.isDisplayed();
+
     }*/
+
     //pageLoad is a method to verify that the page is load it's done via the state of document.ReadyState
     public boolean pageLoad(){
         return new WebDriverWait(driver, 20).until((ExpectedCondition<Boolean>) (driver1) ->

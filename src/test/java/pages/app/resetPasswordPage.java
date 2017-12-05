@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import helper.DBHelper;
 
+import java.util.List;
 import java.util.Map;
 
 public class resetPasswordPage extends basePage{
@@ -27,6 +28,13 @@ public class resetPasswordPage extends basePage{
     private WebElement wrongAnswerPopUp;
     @FindBy(css = ".modal-content")
     private WebElement modal;
+    @FindBy(css = "input#password")
+    private List<WebElement> passwordfields;
+    @FindBy(css = "button#change-password-btn")
+    private WebElement SNPbutton;
+    @FindBy(css = "div.alert.alert-warning")
+    private WebElement passwordMismatchWarning;
+
     private String email;
     String questionString;
     String answerString;
@@ -69,6 +77,20 @@ public class resetPasswordPage extends basePage{
     public String getDBquestion(){
         return questionString;
     }
+    public basePage SetNewPassword(String a, String b ){
+        passwordfields.get(0).clear();
+        passwordfields.get(0).sendKeys(a);
+        passwordfields.get(1).clear();
+        passwordfields.get(1).sendKeys(b);
+        SNPbutton.click();
+        if (a==b){
+            return new basePage(driver, DBHelper);
+        }else{return null;}
+    }
+    public boolean isMismatch(){
+        return passwordMismatchWarning.isDisplayed();
+    }
+
 
 }
 

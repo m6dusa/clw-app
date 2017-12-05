@@ -55,7 +55,7 @@ public class loginPage extends basePage {
         try {
             loginBtn.click();
             //if we see an error we just return null, or return an actual pageObject - if is added just as plug
-            if (getErrorText().equals(getLoginError()))
+            if (errorMsg.isDisplayed())
                 return null;
             else return new homePage(driver, DBHelper);
         } catch (org.openqa.selenium.TimeoutException ex) {
