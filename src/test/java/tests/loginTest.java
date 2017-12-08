@@ -52,4 +52,17 @@ public class loginTest extends baseTest {
          loginPage.login();
          Assert.assertEquals(loginPage.getErrorText(), loginPage.getLoginError());
     }
+    @Test(description = "go to support page")
+    public void goToSupPage(){
+        loginPage loginPage = new loginPage(driver, DBHelper, "https://app-dev.classwallet.com");
+        supportPage supportPage = loginPage.clickSupportLink();
+        Assert.assertTrue(supportPage.getUniqueElementText().equals("support".toUpperCase()));
+    }
+    @Test(description = "go to forgot password page")
+    public void goToForgotPasswordPage(){
+        loginPage loginPage = new loginPage(driver, DBHelper, "https://app-dev.classwallet.com");
+        resetPasswordPage RPPage = loginPage.clickResetPasswordLink();
+        Assert.assertTrue(RPPage.isResetPasswordPage());
+
+    }
 }

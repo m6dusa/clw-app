@@ -44,6 +44,14 @@ public class resetPasswordPage extends basePage{
         new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(resetpswheader, "Reset Password"));
 
     }
+    public resetPasswordPage(WebDriver driver, DBHelper DBHelper,String url){
+        super(driver, DBHelper);
+        navigateTo(url);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(resetpswheader, "Reset Password"));
+    }
+        public boolean isResetPasswordPage(){
+        return resetpswheader.isDisplayed();
+    }
     public void enterEmail(String email){
         emailfield.clear();
         this.email = email;
@@ -51,10 +59,10 @@ public class resetPasswordPage extends basePage{
         this.questionString =  qa.get("question");
         this.answerString =  qa.get("answer");
         emailfield.sendKeys(email);
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(question));
     }
     public void submitEmail(){
         submitEmail.click();
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(question));
     }
     public void enterAnswer(){
         this.answer.clear();
@@ -62,7 +70,7 @@ public class resetPasswordPage extends basePage{
     }
     public void enterWrongAnswer(){
         this.answer.clear();
-        this.answer.sendKeys(answerString+"1");
+        this.answer.sendKeys("justsimplestring");
     }
     public void submitAnswer(){
         this.submitAnswer.click();
@@ -77,17 +85,23 @@ public class resetPasswordPage extends basePage{
     public String getDBquestion(){
         return questionString;
     }
-    public basePage SetNewPassword(String a, String b ){
+    public homePage setNewPassword(String a, String b ){
         passwordfields.get(0).clear();
         passwordfields.get(0).sendKeys(a);
         passwordfields.get(1).clear();
         passwordfields.get(1).sendKeys(b);
         SNPbutton.click();
         if (a==b){
-            return new basePage(driver, DBHelper);
+            return new homePage(driver, DBHelper);
         }else{return null;}
     }
-    public boolean isMismatch(){
+    public boolean wrongEmailPopUpShown(){
+        return wrongEmailPopUp.isDisplayed();
+    }
+    public boolean wrongAnswerPopUpDisplayed(){
+        return wrongAnswerPopUp.isDisplayed();
+    }
+    public boolean wrongPasswordPopUpDisplayed(){
         return passwordMismatchWarning.isDisplayed();
     }
 

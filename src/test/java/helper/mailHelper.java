@@ -12,7 +12,7 @@ public class mailHelper {
 
             static String hostval = "pop.gmail.com";
         //for Google
-        public static void getResetPasswordLink(String uname,String pwd) {
+        public static String getResetPasswordLink(String uname, String pwd) {
             try {
                 //Set property values
                 Properties propvals = new Properties();
@@ -40,13 +40,18 @@ public class mailHelper {
 
                 emailFolderObj.close(false);
                 storeObj.close();
+                return ((String)(part.getContent())).substring(m.start(), m.end());
             } catch (NoSuchProviderException exp) {
                 exp.printStackTrace();
+                return null;
             } catch (MessagingException exp) {
                 exp.printStackTrace();
+                return null;
             } catch (Exception exp) {
                 exp.printStackTrace();
+                return null;
             }
+
         }
 }
 

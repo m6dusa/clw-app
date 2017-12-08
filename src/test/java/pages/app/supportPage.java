@@ -11,7 +11,7 @@ public class supportPage extends basePage {
     private WebElement uniqueElement;
     public supportPage(WebDriver driver){
         super(driver);
-        new WebDriverWait(driver, 10).until(ExpectedConditions.urlMatches("https://www.classwallet.com/support"));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(uniqueElement));
     }
     public String getUniqueElementText(){
         return uniqueElement.getText();
